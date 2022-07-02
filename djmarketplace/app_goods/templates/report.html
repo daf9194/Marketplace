@@ -1,0 +1,12 @@
+<html>
+
+<h1>Отчет</h1>
+
+<ul>Корзина : 
+    {%for g in good_list %}
+    <li>{{g.id}} {{g.good_name}} {{g.pop}}</li>
+    {%endfor%}</ul>
+
+<p><a href="/market/goodlist/">Магазин</a></p>
+
+</html>

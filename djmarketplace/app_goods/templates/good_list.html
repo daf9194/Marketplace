@@ -1,0 +1,41 @@
+<html>
+
+<h1>Список товаров</h1>
+
+<h2><a href="/users/account">Profile: {{request.user}} </a></h2>
+
+<h2>Balance: {{request.user.profile.balance}}</h2>
+<h2>Статус: {{request.user.profile.status}}</h2>
+<h3><a href="/market/report">Отчет</a></h3>
+
+
+
+
+{% if request.user.profile.basket.all %}
+<p><a href="/market/basket/">Корзина: </a> 
+    {%for bs in request.user.profile.basket.all %}
+    {{bs.good.good_name}}
+    {%endfor%}</p>
+{% else %}
+<p>Корзина пуста</p>
+{% endif %}
+
+{% if good_list %}
+<ul>
+    {% for good in good_list %}
+    <li>
+        <a href="/market/good_detail/{{ good.id }}"> {{good.good_name}} </a>
+        , цена: {{good.price}}, доступно в магазинах: 
+        {%for st in good.store.all %}
+        {{st}}
+        Остаток: {{good.amount}}
+        Продано шт: {{good.pop}}
+        {%endfor%}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>Товаров нет</p>
+{% endif %}
+
+</html>

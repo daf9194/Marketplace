@@ -1,0 +1,31 @@
+<html>
+
+<h1>Страница товара</h1>
+
+<h2><a href="/users/account">Profile: {{request.user}} </a></h2>
+<h2>Balance: {{request.user.profile.balance}}</h2>
+<h2>Статус: {{request.user.profile.status}}</h2>
+{% if request.user.profile.basket.all %}
+<p><a href="/market/basket/">Корзина: </a> {%for bs in request.user.profile.basket.all %}
+    {{bs.good.good_name}}
+    {%endfor%}</p>
+{% else %}
+<p>Корзина пуста</p>
+{% endif %}
+
+<p>{{good.good_name}}</p>
+<p>цена: {{good.price}}</p>
+<p>доступно в магазинах: 
+        {%for st in good.store.all %}
+        {{st}}
+        {%endfor%}</p>
+
+<form method="post" action="">
+        {% csrf_token %}
+        {{ add_good.as_p }}
+        <button type="submit">В корзину</button>
+    </form>
+
+<p><a href="/market/goodlist/">Магазин</a></p>
+
+</html>
